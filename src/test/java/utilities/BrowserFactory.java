@@ -5,13 +5,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import org.testng.annotations.Test;
 
 public class BrowserFactory {
 
     static WebDriver driver;
 
-    public void startBrowser(String BrowserChoice, String siteURL){
+    public static WebDriver startBrowser(String BrowserChoice, String siteURL){
         if(BrowserChoice.equalsIgnoreCase("chrome")){
             driver = new ChromeDriver();
 
@@ -24,6 +23,7 @@ public class BrowserFactory {
         }
         driver.manage().window().maximize();
         driver.get(siteURL);
+        return driver;
     }
 //    @Test
 //    public void testBrowser() throws InterruptedException {
