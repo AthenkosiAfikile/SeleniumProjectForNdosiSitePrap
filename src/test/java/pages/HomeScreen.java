@@ -13,10 +13,16 @@ import java.time.Duration;
 public class HomeScreen {
 
     WebDriver driver;
-    WebDriverWait wait;
-
+    String ExpectedResults;
+    String ActualResults;
     @FindBy(xpath = "//h1[normalize-space()='Master Test Automation']")
     WebElement homeTitleXpath;
+
+    @FindBy(xpath = "//span[normalize-space()='Login']")
+    WebElement loginButtonXpath;
+
+    @FindBy(xpath = "//span[normalize-space()='Access Learning Materials']")
+    WebElement loginPageTitleXpath;
 
     public HomeScreen(WebDriver driver){
         this.driver = driver;
@@ -26,13 +32,40 @@ public class HomeScreen {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(homeTitleXpath));
         homeTitleXpath.isDisplayed();
 
-        String ExpectedResults = "Master Test Automation";
-        String ActualResults = homeTitleXpath.getText();
+        ExpectedResults = "Master Test Automation";
+        ActualResults = homeTitleXpath.getText();
 
         System.out.println("Expected Results: "+ ExpectedResults);
         System.out.println("Expected Results: "+ ActualResults);
 
         Assert.assertEquals(ActualResults,
                 ExpectedResults, "The home page is not opened or title is not the visible as expected");
+    }
+
+    public void clickLogin(){
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(loginButtonXpath));
+
+        if(loginButtonXpath.isDisplayed()){
+            loginButtonXpath.click();
+            new WebDriverWait(driver, Duration.ofSeconds(10)).until(
+                    ExpectedConditions.visibilityOf(loginPageTitleXpath)).isDisplayed();
+
+            ExpectedResults = "Access Learning Materials";
+            ActualResults = loginPageTitleXpath.getText();
+
+            System.out.println("Expected Results: "+ ExpectedResults);
+            System.out.println("Expected Results: "+ ActualResults);
+
+            Assert.assertEquals(ActualResults,
+                    ExpectedResults, "The login page is not opened or title is not the visible as expected");
+
+
+
+        }
+//        else {
+//            Assert.assertEquals(ActualResults,
+//                    ExpectedResults, "The login page is not opened or title is not the visible as expected");
+//        }
+
     }
 }
