@@ -17,8 +17,9 @@ public class NdosiSiteTests extends Base {
     }
 
     @Test(priority = 2)
-    public void verifyLoginTitleTest(){
+    public void verifyLoginTitleTest() throws InterruptedException {
         homeLoginScreen.verifyLoginTitle();
+        Thread.sleep(3000);
     }
 
     @AfterTest
