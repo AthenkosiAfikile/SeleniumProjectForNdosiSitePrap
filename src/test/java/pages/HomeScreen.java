@@ -12,17 +12,17 @@ import java.time.Duration;
 
 public class HomeScreen {
 
-    WebDriver driver;
-    String ExpectedResults;
-    String ActualResults;
+    final WebDriver driver;
+    private String ExpectedResults;
+    private String ActualResults;
     @FindBy(xpath = "//h1[normalize-space()='Master Test Automation']")
-    WebElement homeTitleXpath;
+    private WebElement homeTitleXpath;
 
     @FindBy(xpath = "//span[normalize-space()='Login']")
-    WebElement loginButtonXpath;
+    private WebElement loginButtonXpath;
 
     @FindBy(xpath = "//span[normalize-space()='Access Learning Materials']")
-    WebElement loginPageTitleXpath;
+    private WebElement loginPageTitleXpath;
 
     public HomeScreen(WebDriver driver){
         this.driver = driver;
@@ -36,7 +36,7 @@ public class HomeScreen {
         ActualResults = homeTitleXpath.getText();
 
         System.out.println("Expected Results: "+ ExpectedResults);
-        System.out.println("Expected Results: "+ ActualResults);
+        System.out.println("Actual Results: "+ ActualResults);
 
         Assert.assertEquals(ActualResults,
                 ExpectedResults, "The home page is not opened or title is not the visible as expected");
@@ -54,18 +54,13 @@ public class HomeScreen {
             ActualResults = loginPageTitleXpath.getText();
 
             System.out.println("Expected Results: "+ ExpectedResults);
-            System.out.println("Expected Results: "+ ActualResults);
+            System.out.println("Actual Results: "+ ActualResults);
 
             Assert.assertEquals(ActualResults,
                     ExpectedResults, "The login page is not opened or title is not the visible as expected");
-
-
-
+        } else {
+            Assert.fail("Login button is not visible or clickable");
         }
-//        else {
-//            Assert.assertEquals(ActualResults,
-//                    ExpectedResults, "The login page is not opened or title is not the visible as expected");
-//        }
 
     }
 }
